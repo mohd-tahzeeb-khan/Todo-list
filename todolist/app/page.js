@@ -5,8 +5,17 @@ import React, { useState } from 'react'
 function page() {
   const [title, settitle] = useState("")
   const [description, setdescription] = useState("")
+  const [mainTask, setmainTask] = useState([])
+  let renderTask=<h2>No task Available</h2>
+  renderTask=mainTask.map((t, i)=>{
+    return <div className='flex ml-5'>
+      <h5 className='ml-5 text-5xl'>{t.title}</h5>
+      <h5 className='ml-5 text-5xl'>{t.description}</h5>
+    </div>
+  })
   const submit=(e)=>{
     e.preventDefault()
+    setmainTask([...mainTask, {title, description}])
     console.log(title)
     console.log(description)
 
@@ -32,6 +41,10 @@ function page() {
         }} />
         <button className='rounded text-3xl py-5 px-5 bg-green-400 text-black m-10'>Add</button>
       </form>
+      <hr />
+      <div className='h-5 bg-zinc-800'>
+        <ul>{renderTask}</ul>
+      </div>
     </>
   )
 }
